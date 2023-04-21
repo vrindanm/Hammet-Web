@@ -1,0 +1,59 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Contact{% endblock title %}
+{% block main-content %} 
+<div class="container">
+<section class="mb-4">
+    <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+    <hr>
+    <form class="" method="post" action="{% url 'contact' %}" autocomplete="off">
+        {% csrf_token %}
+        {% for fm in form %}
+            {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small><br>
+        {% endfor %}  
+        <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+            a matter of hours to help you.</p>
+        <div class="row">
+            <div class="col-md-9 mb-md-0 mb-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <input type="text" id="name" placeholder="Your name" name="name" class="form-control">           
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <input type="text" id="email" placeholder="Your email" name="email" class="form-control">
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form">
+                            <textarea type="text" id="message" placeholder="Your message" name="message" rows="2" class="form-control md-textarea"></textarea>    
+                        </div>
+                    </div>
+                </div><br>
+                <div class="text-center text-md-left">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <ul class="list-unstyled mb-0">
+                    <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                        <p>Kannur,Kerala, IND</p>
+                    </li>
+                    <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                        <p>+ 91 2345 673489</p>
+                    </li>
+                    <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                        <p>hammetclothing@gmail.com</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</section>
+</div>    
+{% endblock main-content %}

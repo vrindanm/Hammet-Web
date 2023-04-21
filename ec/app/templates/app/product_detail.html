@@ -1,0 +1,25 @@
+{% comment %} <h1>{{ product.name }}</h1>
+<p>{{ product.description }}</p>
+<ul>
+{% for variation in variations %}
+    <li>
+        Size: {{ variation.size }}<br>
+        Price: {{ variation.price }}<br>
+        Stock: {{ variation.stock }}<br>
+    </li>
+{% endfor %}
+</ul> {% endcomment %}
+{% comment %} <h1>{{ product.name }}</h1>
+<p>{{ product.description }}</p>
+<form>
+    <select>
+    {% for variation in variations %}
+        <option>{{ variation.size }}</option>
+    {% endfor %}
+    </select>
+</form> {% endcomment %}
+
+
+
+
+
