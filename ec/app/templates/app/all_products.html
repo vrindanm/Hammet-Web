@@ -1,0 +1,54 @@
+{% extends 'app/base.html' %}
+
+{% block title %}All Products{% endblock title %}
+
+{% block main-content %}
+<div class="container">
+    <h1 class="text-center">ALL PRODUCTS</h1> 
+    <br>
+    <div class="col-sm-12">
+    <div class="row">
+        {% for prod in products %}
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="productstyle text-center">
+                <a href="{% url 'product-detail' prod.id %}" class="btn">
+                    <div class="card">
+                        <img src="{{prod.product_image.url}}" class="img-fluid" alt="{{prod.title}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{prod.title}}</h5>
+                            <p class="card-text fw-bold text-dark">Rs.{{prod.selling_price}}/-</p>
+                        </div> 
+                    </div>     
+                </a>
+            </div> 
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div><br>
+{% endblock main-content %}
+ 
+
+{% comment %} {% extends 'app/base.html' %}
+{% block title %}All Products{% endblock title %}
+{% block main-content %}
+<div class="container">
+    <h1 class="text-center">ALL PRODUCTS</h1> 
+    <br><br>
+    <div class="row container">
+        
+        {% for prod in products %}
+        <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
+            <div class="productstyle text-center">     
+            <img src="{{prod.product_image.url}}" width="300 px" height="200px">
+            <div class="fw-bold">{{prod.title}}</div>
+            <div class="fw-bold text-dark">
+            Rs.{{prod.selling_price}}/- 
+            </div>    
+            </div> 
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main-content %}
+ {% endcomment %}

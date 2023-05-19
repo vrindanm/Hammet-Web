@@ -14,45 +14,33 @@
             <ul class="fs-5" style="font-family:Rajadhani;">
                 <li>{{product.description}}</li>
             </ul> 
-            <ul class="fs-5" style="font-family:Rajadhani;">
-                <li>{{product.sizes}}</li>
-            </ul> 
-                        {% comment %} 
-            <form action="/add-to-cart" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="prod_id" value="{{ product.id }}">   
-                <label for="size"><strong>Size</strong></label>
-                <select name="size" id="size">
-                  <option value="S">Small</option>
-                  <option value="M">Medium</option>
-                  <option value="L">Large</option>
-                </select>
-            </form>
-            <br>  {% endcomment %}
-            {% comment %} <div class="col-sm-9">
-            <div class="my-3">
-                <label for="quantity"><strong>Quantity</strong></label>
-                <a class="minus-cart btn" pid={{item.product.id}}><i class="fas fa-minus-square fa-lg"></i></a>
-                <span id="quantity">{{item.quantity}}</span>
-                <a class="plus-cart btn" pid={{item.product.id}}><i class="fas fa-plus-square fa-lg"></i></a>  
-            </div>
             
-            </div> {% endcomment %}
-            {% comment %} <form method="POST" action="{% url 'add_to_cart' %}">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Add to Cart</button>
-            </form> {% endcomment %}
-            
-
-              
             <form action="/add-to-cart" class="d-inline ">
                 <input type="hidden" name="prod_id" value="{{product.id}}">
-                {% csrf_token %}
-                {{ form.as_p }}
                     <button type="submit" class="btn btn-info px-5 py-2">Add to Cart</button>
             </form>
                 <a href="{% url 'showcart' %}" class="btn btn-warning px-5 py-2 ms-4">Buy Now</a>
+                {% if wishlist %}
+                    <a pid={{product.id}} class="minus-wishlist btn btn-danger shadow  px-5 py-2 ms-4"><i class="fas fa-heart fa-lg"></i> </a>
+                {% else %}
+                    <a pid={{product.id}} class="plus-wishlist btn btn-success shadow  px-5 py-2 ms-4"><i class="fas fa-heart fa-lg"></i> </a>
+                {% endif %}
+            
+                {% comment %} <h3>Reviews</h3>
+                {% if reviews %}
+                    {% for review in reviews %}
+                    <div class="card my-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ review.user.username }}</h5>
+                            <p class="card-text">{{ review.text }}</p>
+                        </div>
+                    </div>
+                     {% endfor %}
+                {% else %}
+                    <p>No reviews yet.</p>
+                {% endif %}
+                {% endcomment %}
+                
         </div>   
     </div>
 </div>

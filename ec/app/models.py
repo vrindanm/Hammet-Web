@@ -44,61 +44,26 @@ CATEGORY_CHOICES=[
     ('HS','Hoodies'),
     ('SS','Sweet Shirts'),
 ]
- 
-# SIZE_CHOICES = (
-#         ('S', 'Small'),
-#         ('M', 'Medium'),
-#         ('L', 'Large'),
-#         ('XL', 'Extra Large'),
-#     )
+
+RATING_CHOICES = (
+    (1, '1 Star'),
+    (2, '2 Star'),
+    (3, '3 Star'),
+    (4, '4 Star'),
+    (5, '5 Star'),
+)
 
 class Product(models.Model):
     title=models.CharField(max_length=100)
-    selling_price=models.FloatField(default=0.0)
-    # discounted_price=models.FloatField()
-    discounted_price = models.FloatField(default=0.0)
+    selling_price=models.FloatField()
+    discounted_price=models.FloatField()
     description=models.TextField()
-    category=models.CharField(choices=CATEGORY_CHOICES,max_length=2)
-    product_image=models.ImageField(upload_to='product')
-    sizes = models.CharField(max_length=50, choices=[('S', 'Small'), ('M', 'Medium'), ('L', 'Large')], default='S')
-
-
-    # sizes = models.CharField(max_length=50, default='')
-    def __str__(self):
-        return self.title
-
     # composition=models.TextField(default='')
     # prodapp= models.TextField(default='')
-
-    # size = models.CharField(choices=SIZE_CHOICES, max_length=3, blank=True, null=True)
-
-    # sizes = models.ManyToManyField('Size', related_name='product')
-    # sizes = models.ManyToManyField('Size', related_name='products')
-
-    
-    
-# class Size(models.Model):
-#     name = models.CharField(max_length=10)
-#     def __str__(self):
-#         return self.name    
-
-
-
-
-# class Product(models.Model):
-#     title = models.CharField(max_length=100)
-#     description = models.TextField()
-#     product_image = models.ImageField(upload_to='product', default='default_product_image.jpg')
-#     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2, default='AP')
-  
-# class Variation(models.Model):
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     size = models.CharField(max_length=10)
-#     price = models.DecimalField(max_digits=8, decimal_places=2)
-#     stock = models.IntegerField()  
-    # category=models.CharField(choices=CATEGORY_CHOICES,max_length=2)
-
-     
+    category=models.CharField(choices=CATEGORY_CHOICES,max_length=2)
+    product_image=models.ImageField(upload_to='product')
+    def __str__(self):
+        return self.title
 
 class Customer(models.Model):
     user= models.ForeignKey(User,on_delete=models.CASCADE)
@@ -111,13 +76,14 @@ class Customer(models.Model):
     state = models.CharField(choices=STATE_CHOICES,max_length=100)
     def __str__(self):
         return self.name
+    
  
 class Contact(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField()
     message = models.TextField()
     def __str__(self):
-        return self.name
+         return self.name
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -127,14 +93,11 @@ class Cart(models.Model):
     @property
     def total_cost(self):
         return self.quantity * self.product.selling_price
+    
+class Wishlist(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE,default=None)    
 
-# SIZE_CHOICES = [
-#         ('S', 'Small'),
-#         ('M', 'Medium'),
-#         ('L', 'Large'),
-#         # add more size categories as needed
-# ]      
-# class SizeChart(models.Model):
-#     size = models.CharField(max_length=1, choices=SIZE_CHOICES)
-#     measurement = models.CharField(max_length=50) 
+
+
 

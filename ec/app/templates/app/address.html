@@ -1,6 +1,6 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block title %}Address{% endblock title %}
+{% block title %}Customer{% endblock title %}
 {% block main-content %} 
 <div class="container my-5">
     <div class="row">
@@ -25,7 +25,8 @@
                             <p>City:{{ad.city}}</p>
                             <p>State:{{ad.state}}</p>
                             <p>Pincode{{ad.zipcode}}</p>
-                            <p class="text-center"><a href="{% url 'updateaddress' pk=ad.id %}" type="button" class="btn btn-warning">Update</a></p>
+                            <p class="text-center"><a href="{% url 'updateaddress' pk=ad.id %}" type="button" class="btn btn-warning">Update</a>
+                            <a href="{% url 'deleteaddress' pk=ad.pk %}" type="button" class="btn btn-danger">Delete</a></p>
                         </div>  
                     </div>
                 </div>

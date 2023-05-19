@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Customer,Product,Cart,Contact
+from . models import Customer,Product,Cart,Contact,Wishlist
 # ,Variation
 # from .forms import VariationForm
 
@@ -30,3 +30,7 @@ class ContactModelAdmin(admin.ModelAdmin):
 #     inlines = [VariationInline]
 
 # admin.site.register(Product, ProductAdmin)
+
+@admin.register(Wishlist)
+class WishlistModelAdmin(admin.ModelAdmin):
+    list_display = ['id','user','product']

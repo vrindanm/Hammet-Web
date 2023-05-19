@@ -3,27 +3,27 @@
 {% block title %}Category{% endblock title %}
 {% block main-content %}
 {% comment %} <h1>Category : {{product}}</h1> {% endcomment %}
+
 <div class="container my-5">
     <div class="row">
-        <div class="col-sm-3">
+        {% comment %} <div class="col-sm-3">
             <div class="list-group">
                 {% for val in title %}
-                    <a href="{% url 'category-title' val.title %}" class="list-group-item list-group-item-action" aria-current="true">{{val.title}}</a>
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">{{val.title}}</a>
                 {% endfor %}
             </div>
-        </div>
-        <div class="col-sm-9">
+        </div> {% endcomment %}
+        <div class="col-sm-12">
             <div class="row">
                 {% for prod in product %}
-                <div class="col text-center mb-4">
+                <div class="col-md-4 col-sm-6 col-12 mb-4">
                     <a href="{% url 'product-detail' prod.id %}" class="btn">
-                        <div>
-                            <img src="{{prod.product_image.url}}" width="300 px" height="200px"/>
-                            <div class="fw-bold">{{prod.title}}</div>
-                            <div class="fw-bold text-dark">
-                                Rs.{{prod.selling_price}}/-
-                                {% comment %} <small class="fw-light text-decoration-line-through">{{prod.selling_price}}</small> {% endcomment %}
-                            </div>    
+                        <div class="card">
+                            <img src="{{prod.product_image.url}}" class="card-img-top" alt="{{prod.title}}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{prod.title}}</h5>
+                                <p class="card-text fw-bold text-dark">Rs.{{prod.selling_price}}/-</p>
+                            </div>
                         </div>
                     </a>  
                 </div>          
@@ -32,4 +32,52 @@
         </div>
     </div>
 </div>
-{% endblock main-content %}  
+{% endblock main-content %}
+
+{% comment %} {% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Category{% endblock title %}
+{% block main-content %} {% endcomment %}
+
+{% comment %} <h1>Category : {{product}}</h1> {% endcomment %}
+
+
+{% comment %} <div class="container my-5">
+    <div class="row"> {% endcomment %}
+
+
+
+        {% comment %} <div class="col-sm-3">
+            <div class="list-group">
+                {% for val in title %}
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">{{val.title}}</a>
+                {% endfor %}
+            </div>
+        </div> {% endcomment %}
+
+{% comment %} 
+        <div class="col-sm-12">
+            <div class="row">
+                {% for prod in product %}
+                <div class="col text-center mb-4">
+                    <a href="{% url 'product-detail' prod.id %}" class="btn">
+                        <div>
+                            <img src="{{prod.product_image.url}}" width="300 px" height="200px"/>
+                            <div class="fw-bold">{{prod.title}}</div>
+                            <div class="fw-bold text-dark">
+                                Rs.{{prod.selling_price}}/- {% endcomment %}
+
+
+                                {% comment %} <small class="fw-light text-decoration-line-through">{{prod.selling_price}}</small> {% endcomment %}
+                           
+                           
+                            {% comment %} </div>    
+                        </div>
+                    </a>  
+                </div>          
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}   {% endcomment %}

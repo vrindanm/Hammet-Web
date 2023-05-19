@@ -5,6 +5,8 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_view
 from .forms import LoginForm , MyPasswordResetForm , MyPasswordChangeForm, MySetPasswordForm
 
+
+
 urlpatterns = [
     path('',views.home ),
     path('about/',views.about,name="about"),
@@ -12,21 +14,28 @@ urlpatterns = [
     path('category/<slug:val>',views.CategoryView.as_view(),name="category"),
     path('category-title/<slug:val>',views.CategoryTitle.as_view(),name="category-title"),
     path('product-detail/<int:pk>',views.ProductDetail.as_view(),name="product-detail"),
-    # path('category-title/<str:val>/', views.category_title, name='category-title'),
+
     #login redirecting
     path('profile/',views.ProfileView.as_view(),name='profile'),
     path('address/',views.address,name='address'),
     path('updateaddress/<int:pk>', views.updateAddress.as_view(), name='updateaddress'), 
     path('add-to-cart/',views.add_to_cart,name='add-to-cart'),
     path('cart/',views.show_cart,name='showcart'),
-    path('checkout/',views.show_cart,name='checkout'),
+    path('checkout/',views.checkout.as_view(),name='checkout'),
+
     path('pluscart/',views.plus_cart),
     path('minuscart/',views.minus_cart),
     path('removecart/',views.remove_cart),
+
+    path('deleteaddress/<int:pk>/', views.DeleteAddress.as_view(), name='deleteaddress'),
+    path('all-products/', views.all_products, name='all_products'),
+
     # path('size-chart/', views.size_chart, name='size_chart'),
-    
-    # path('create/', views.create_product, name='create_product'),
-    # path('', views.product_list, name='product_list'),
+
+    path('pluswishlist/',views.plus_wishlist),
+    path('minuswishlist/',views.minus_wishlist),
+
+
 
 
     #login authentication

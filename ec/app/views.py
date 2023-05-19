@@ -4,15 +4,15 @@ from django.http import JsonResponse
 from django.db.models import Q
 from django.shortcuts import render,redirect
 from django.views import View
-from . models import Product,Cart, Contact
-from .forms import CustomerProfileForm,Customer, CustomerRegistrationForm, ProductSizeForm
+from . models import Product,Cart, Contact, Wishlist
+from .forms import CustomerProfileForm,Customer, CustomerRegistrationForm
 from django.contrib import messages
-from django.shortcuts import get_object_or_404
-
-
-
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
+  
+
 
 def home(request):
     return render(request,"app/home.html")
@@ -35,41 +35,15 @@ class CategoryTitle(View):
         title = Product.objects.filter(category=product[0].category).values('title')
         return render(request,"app/category.html",locals())      
     
-# class ProductDetail(View):
-#     def get(self,request,pk):
-#         product = Product.objects.get(pk=pk)
-#         return render(request,"app/productdetail.html",locals())
-
-# def product_detail(request, product_id):
-#     product = Product.objects.get(pk=product_id)
-#     variations = Variation.objects.filter(product=product)
-#     context = {
-#         'product': product,
-#         'variations': variations,
-#     }
-#     return render(request, 'product_detail.html', context)
-
-
-# def product_detail(request, product_id):
-#     product = Product.objects.get(pk=product_id)
-#     variations = Variation.objects.filter(product=product)
-#     context = {
-#         'product': product,
-#         'variations': variations,
-#     }
-#     return render(request, 'product_detail.html', context)   
-
-
-
-# def product_detail(request, pk):
-#     product = get_object_or_404(Product, pk=pk)
-#     size_chart = SizeChart.objects.all()
-#     return render(request, 'product_detail.html', {'product': product, 'size_chart': size_chart})
-    
 class ProductDetail(View):
     def get(self,request,pk):
         product = Product.objects.get(pk=pk)
-        return render(request,"app/productdetail.html",locals())    
+        return render(request,"app/productdetail.html",locals())
+
+
+
+    
+    
     
 class CustomerRegistrationView(View): 
     def get(self,request):  
@@ -97,27 +71,54 @@ def contact(request):
     return render(request,'app/contact.html')
 
 
+    
+
+@method_decorator(login_required, name='dispatch')
 class ProfileView(View):
     def get(self,request):
         form= CustomerProfileForm()
         return render(request,"app/profile.html",locals())
+
     def post(self,request):
         form= CustomerProfileForm(request.POST)
-        if form.is_valid():
-            user= request.user
+        if form.is_valid() and request.user.is_authenticated:
             name = form.cleaned_data['name']
             address = form.cleaned_data['address']
             locality = form.cleaned_data['locality']
             city = form.cleaned_data['city']
             mobile = form.cleaned_data['mobile']
             state = form.cleaned_data['state']
-            zipcode = form.cleaned_data['zipcode']    
+            zipcode = form.cleaned_data['zipcode']
+            user= request.user
             reg = Customer(user=user,name=name,address=address,locality=locality,city=city,mobile=mobile,state=state,zipcode=zipcode)
-            reg.save() 
+            reg.save()
             messages.success(request,"Profile saved")
+            form = CustomerProfileForm() # reset form
         else:
             messages.warning(request,"Invalid Data")
         return render(request,"app/profile.html",locals())
+
+# class ProfileView(View):
+#     def get(self,request):
+#         form= CustomerProfileForm()
+#         return render(request,"app/profile.html",locals())
+#     def post(self,request):
+#         form= CustomerProfileForm(request.POST)
+#         if form.is_valid():
+#             user= request.user
+#             name = form.cleaned_data['name']
+#             address = form.cleaned_data['address']
+#             locality = form.cleaned_data['locality']
+#             city = form.cleaned_data['city']
+#             mobile = form.cleaned_data['mobile']
+#             state = form.cleaned_data['state']
+#             zipcode = form.cleaned_data['zipcode']    
+#             reg = Customer(user=user,name=name,address=address,locality=locality,city=city,mobile=mobile,state=state,zipcode=zipcode)
+#             reg.save() 
+#             messages.success(request,"Profile saved")
+#         else:
+#             messages.warning(request,"Invalid Data")
+#         return render(request,"app/profile.html",locals())
     
 def address(request):
         add = Customer.objects.filter(user=request.user)
@@ -145,6 +146,14 @@ class updateAddress(View):
             messages.warning(request,"Invalid data")
         return redirect('address')
 
+
+class DeleteAddress(View):
+    def get(self, request, pk):
+        add = Customer.objects.get(pk=pk)
+        add.delete()
+        # messages.success(request, "Address deleted")
+        return redirect('address')
+    
 # def add_to_cart(request):
 #     user=request.user
 #     product_id=request.GET.get('prod_id')
@@ -161,25 +170,16 @@ def add_to_cart(request):
     if not created:
         cart_item.quantity += 1
         cart_item.save()
-        messages.info(request, "This item quantity was updated.")
+        # messages.info(request, "This item quantity was updated.")
     else:
         cart_item.quantity = 1
         cart_item.save()
-        messages.success(request, "This item was added to your cart.") 
+        # messages.success(request, "This item was added to your cart.") 
     return redirect('/cart')  
 
     # Cart(user=user,product=product).save()
     # return redirect("/cart")
-
-def cart_add(request):
-    cart = Cart(request)
-    product_id = request.POST['product_id']
-    product = get_object_or_404(Product, pk=product_id)
-    size = request.POST['size']
-    cart.add(product=product, size=size)
-    return redirect('cart_detail')
-
-
+    
 
 def show_cart(request):
     user= request.user
@@ -190,7 +190,20 @@ def show_cart(request):
         amount=amount +value
     totalamount= amount+20    
     return render(request, 'app/addtocart.html',locals())
-  
+
+class checkout(View):
+    def get(self,request):
+        user=request.user
+        add=Customer.objects.filter(user=user)
+        cart_items=Cart.objects.filter(user=user)
+        famount=0
+        for p in cart_items:
+            value = p.quantity * p.product.selling_price
+            famount = famount +value
+        totalamount = famount + 20    
+        return render(request, 'app/checkout.html',locals())
+
+
 def plus_cart(request):
     if request.method =='GET':
         prod_id=request.GET['prod_id']
@@ -217,8 +230,9 @@ def minus_cart(request):
     if request.method =='GET':
         prod_id=request.GET['prod_id']
         c = Cart.objects.get(Q(product=prod_id) & Q(user=request.user))
-        c.quantity-=1 
-        c.save()     
+        if c.quantity > 1:
+            c.quantity-=1 
+            c.save()     
         user = request.user
         cart = Cart.objects.filter(user=user)
         amount=0
@@ -250,29 +264,45 @@ def remove_cart(request):
             'amount':amount,
             'totalamount':totalamount     
         }
-        return JsonResponse(data) 
+        return JsonResponse(data)   
+
+def all_products(request):
+    products = Product.objects.all()
+    return render(request, 'app/all_products.html', {'products': products})    
+
   
-# def size_chart(request):
-#     size_chart = SizeChart.objects.all()
-#     return render(request, 'size_chart.html', {'size_chart': size_chart})
-# def add_to_cart(request):
-#     if request.method == 'POST':
-#         prod_id = request.POST.get('prod_id')
-#         size = request.POST.get('size')
-        # rest of the code for adding to cart goes here
+def plus_wishlist(request):
+    if request.method=='GET':
+        prod_id=request.Get['prod_id']
+        product=Product.objects.get(id=prod_id)
+        user =request.user
+        Wishlist(user=user,product=product).save()
+        data={
+            'message':'Wishlist Added Successfully',
+        }
+        return JsonResponse(data)
 
-# def add_product(request):
-#     if request.method == 'POST':
-#         form = ProductForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('product_list')
-#     else:
-#         form = ProductForm()
-#     return render(request, 'add_product.html', {'form': form})
 
-def product_detail(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-    form = ProductSizeForm()
-    return render(request, 'product_detail.html', {'product': product, 'form': form})
 
+def minus_wishlist(request):
+    if request.method=='GET':
+        prod_id=request.Get['prod_id']
+        product=Product.objects.get(id=prod_id)
+        user =request.user
+        Wishlist.objects.filter(user=user,product=product).delete()
+        data={
+            'message':'Wishlist Remove Successfully',
+        }
+        return JsonResponse(data)
+
+def minus_wishlist(request):
+    if request.method=='GET':
+        prod_id=request.Get['prod_id']
+        product=Product.objects.get(id=prod_id)
+        user =request.user
+        Wishlist.objects.filter(user=user,product=product).delete()
+        data={
+            'message':'Wishlist Remove Successfully',
+        }
+        return JsonResponse(data)
+ 

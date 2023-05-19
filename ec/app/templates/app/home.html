@@ -17,39 +17,69 @@
       <img src="{% static 'app\images\banner\b4.jpg'%}" class="d-block w-100" alt="image banner">
     </div>
   </div>
-</div>
+</div><br>
 {% endblock banner-slider%}
 {% block main-content %}
 <div class="container">
-  <h1 class="text-center">ALL PRODUCTS</h1> 
+  <h1 class="text-center">NEW ARRIVALS</h1> 
   <br><br>
   <div class="row container">
     <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
-      <div class="goodnesssec ">
-        <a href="#">
-          <div class="goodnessseccont text-center">
-            <img src="{% static 'app/images/product/higher-tshirt.jpg'%}" class="img-responsive center-block fit-image" alt="">
-            <p class="mlkpro">T Shirt</p>
+      <div class="productstyle">
+        <a href="{% url 'category' 'SS' %}">
+          <div class="productstyle text-center">
+            <img src="{% static 'app/images/product/ss1.jpg'%}" class="img-responsive center-block fit-image" alt="">
           </div>
         </a>
       </div> 
     </div>  
     <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
-        <div class="goodnesssec ">
+        <div class="productstyle">
           <a href="{% url 'category' 'TS' %}">
-            <div class="goodnessseccont text-center">
-              <img src="{% static 'app/images/product/lady-flower-sqr.jpg'%}"  class="img-responsive center-block fit-image" alt="">
-              <p class="mlkpro">T Shirt</p>
+            <div class="productstylet text-center">
+              <img src="{% static 'app/images/product/ts1.jpg'%}"  class="img-responsive center-block fit-image" alt="">
             </div>
           </a>
         </div> 
       </div>
       <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
-          <div class="goodnesssec ">
-            <a href="{%url 'category' 'TS' %}">
-              <div classs="goodnessseccont text-center">
-                <img src="{% static 'app/images/product/lady-orange.jpg'%}"  class="img-responsive center-block fit-image" alt="">
-                <p class="mlkpro">T Shirt</p>
+          <div class="productstyle">
+            <a href="{%url 'category' 'HS' %}">
+              <div classs="productstyle text-center">
+                <img src="{% static 'app/images/product/hs1.png'%}"  class="img-responsive center-block fit-image" alt="">
+              </div>
+            </a>
+          </div> 
+        </div>  
+  </div>  <br>
+</div>
+<div class="container">
+  <h1 class="text-center">ALL PRODUCTS</h1> 
+  <br><br>
+  <div class="row container">
+    <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
+      <div class="productstyle">
+        <a href="{% url 'category' 'SS' %}">
+          <div class="productstyle text-center">
+            <img src="{% static 'app/images/product/ss1.jpg'%}" class="img-responsive center-block fit-image" alt="">
+          </div>
+        </a>
+      </div> 
+    </div>  
+    <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
+        <div class="productstyle">
+          <a href="{% url 'category' 'TS' %}">
+            <div class="productstyle text-center">
+              <img src="{% static 'app/images/product/ts1.jpg'%}"  class="img-responsive center-block fit-image" alt="">
+            </div>
+          </a>
+        </div> 
+      </div>
+      <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
+          <div class="productstyle">
+            <a href="{%url 'category' 'HS' %}">
+              <div classs="productstyle text-center">
+                <img src="{% static 'app/images/product/hs1.png'%}"  class="img-responsive center-block fit-image" alt="">
               </div>
             </a>
           </div> 
@@ -57,37 +87,40 @@
   </div>  <br>
   <div class="row container">
     <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
-      <div class="goodnesssec ">
+      <div class="productstyle">
         <a href="{%url 'category' 'TS' %}">
-          <div classs="goodnessseccont text-center">
+          <div classs="productstyle text-center">
             <img src="{% static 'app/images/product/lady.jpg'%}"  class="img-responsive center-block fit-image" alt="">
-            <p class="mlkpro">T Shirt</p>
           </div>
         </a>
       </div> 
     </div>  
     <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
-      <div class="goodnesssec ">
+      <div class="productstyle">
         <a href="{%url 'category' 'TS' %}">
-          <div classs="goodnessseccont text-center">
+          <div classs="productstyle text-center">
             <img src="{% static 'app/images/product/lady-flower-sqr.jpg'%}"  class="img-responsive center-block fit-image" alt="">
-            <p class="mlkpro">T Shirt</p>
+
           </div>
         </a>
       </div> 
     </div>
    
     <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
-        <div class="goodnesssec ">
+        <div class="productstyle">
           <a href="{%url 'category' 'TS' %}">
-            <div classs="goodnessseccont text-center">
+            <div classs="productstyle text-center">
               <img src="{% static 'app/images/product/love-vee.jpg'%}"  class="img-responsive center-block fit-image" alt="">
-              <p class="mlkpro">T Shirt</p>
             </div>
           </a>
         </div> 
       </div> 
   </div>  <br>
+  <div class="container">
+    <div class="text-center">
+        <a href="{% url 'all_products' %}" class="btn btn-primary">See All</a>
+    </div>
+  </div>
 </div>    
 <br/><br/>
 {% endblock main-content %}

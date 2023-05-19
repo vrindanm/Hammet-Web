@@ -42,44 +42,13 @@
        height: 100%;
        object-fit: cover;
      }
+  
      
    
-   
-   
-   
-   .buttermilk{
-       background-color:#fff;background-image:linear-gradient(#fff7ef, #fff);
-       background-image:-webkit-linear-gradient(#fff7ef, #fff);
-       background-image:-moz-linear-gradient(#fff7ef, #fff);
-       background-image:-ms-linear-gradient(#fff7ef, #fff);
-       background-image:-o-linear-gradient(#fff7ef, #fff);
-       padding:50px 40px;
-       border:1px solid #efe8e1;
-       padding-bottom:20px;
-   }
-   
-   .smbg{
-       background-color:#fff;
-       background-image:linear-gradient(rgba(110, 69, 143, 0.1), #fff);
-       background-image:-webkit-linear-gradient(rgba(110, 69, 143, 0.1), #fff);
-       background-image:-moz-linear-gradient(rgba(110, 69, 143, 0.1), #fff);
-       background-image:-ms-linear-gradient(rgba(110, 69, 143, 0.1), #fff);
-       background-image:-o-linear-gradient(rgba(110, 69, 143, 0.1), #fff);
-   }
-   
-   .curdbgpro{
-       background-color:#fff;
-       background-image:linear-gradient(rgba(10, 77, 123, 0.1), #fff);
-       background-image:-webkit-linear-gradient(rgba(10, 77, 123, 0.1), #fff);
-       background-image:-moz-linear-gradient(rgba(10, 77, 123, 0.1), #fff);
-       background-image:-ms-linear-gradient(rgba(10, 77, 123, 0.1), #fff);
-       background-image:-o-linear-gradient(rgba(10, 77, 123, 0.1), #fff);
-   }
-   
-   .goodnessseccont img{
+   .productstyle img{
        width:100%;
    }
-   
+/*    
    .mlkpro{
        color:#636362;
        font-size:22px;
@@ -89,8 +58,35 @@
        margin:0 auto;
        text-align:center;
        
-   }
+   } */
    
-   .goodnesssec a{
+   .productstyle a{
        text-decoration: none;
    }
+
+   .stars {
+    display: inline-block;
+    font-size: 1.5em;
+  }
+  
+  .star {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.25em;
+    background-image: url('/path/to/star-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  .star.active {
+    background-image: url('/path/to/star-icon-filled.png');
+  }
+  
+   
+
+   
+
+   
+
+

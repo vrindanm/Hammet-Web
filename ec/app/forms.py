@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm,  UsernameField, PasswordChangeForm, SetPasswordForm ,PasswordResetForm
 from django.contrib.auth.forms import User
-from .models import Customer, Product
-# , Product, Variation
+from .models import Customer
+from django.core.validators import RegexValidator
+
 
 class LoginForm(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={'autofocus':'True','class':'form-control'}))
@@ -33,6 +34,15 @@ class MySetPasswordForm(SetPasswordForm):
 
 
 class CustomerProfileForm(forms.ModelForm):
+    mobile = forms.CharField(validators=[RegexValidator(regex='^[0-9]{10}$', message='Enter a valid 10 digit mobile number.')], max_length=10, widget=forms.TextInput(attrs={'class':'form-control', 'error_messages': {'invalid': 'Please enter a 10 digit mobile number.'}}))
+    zipcode = forms.CharField(validators=[RegexValidator(regex='^[0-9]{6}$', message='Enter a valid pincode '
+                                                                                      'number.')], max_length=6,
+                              widget=forms.TextInput(attrs={'class':'form-control', 'error_messages': {'invalid':
+                                                                                                           'Please '
+                                                                                                           'enter a '
+                                                                                                           'valid '
+                                                                                                           'pincode.'}}))
+
     class Meta:
         model = Customer
         fields=['name','address','locality','city','mobile','state','zipcode']
@@ -41,24 +51,16 @@ class CustomerProfileForm(forms.ModelForm):
             'address':forms.TextInput(attrs={'class':'form-control'}),
             'locality':forms.TextInput(attrs={'class':'form-control'}),
             'city':forms.TextInput(attrs={'class':'form-control'}),
-            'mobile':forms.NumberInput(attrs={'class':'form-control'}),
+            # 'mobile':forms.NumberInput(attrs={'class':'form-control'}),
             'state':forms.Select(attrs={'class':'form-control'}),
-            'zipcode':forms.NumberInput(attrs={'class':'form-control'}),
+            # 'zipcode':forms.NumberInput(attrs={'class':'form-control'}),
         }
 
-# class ProductForm(forms.ModelForm):
-#     class Meta:
-#         model = Product
-#         fields = ['title', 'description']
 
 
-# class VariationForm(forms.ModelForm):
-#     size = forms.MultipleChoiceField(choices=[('S', 'Small'), ('M', 'Medium'), ('L', 'Large')], widget=forms.CheckboxSelectMultiple)
 
-#     class Meta:
-#         model = Variation
-#         fields = '__all__'        
 
-class ProductSizeForm(forms.Form):
-    size = forms.ChoiceField(choices=[('S', 'Small'), ('M', 'Medium'), ('L', 'Large')], widget=forms.RadioSelect)
+
+
+
 
