@@ -2,6 +2,12 @@
 {% load static %}
 {% block title %}Home{% endblock title %}
 {% block banner-slider %}
+<style>
+  .btn-custom {
+      background-color: rgb(160,160,160);
+  }
+</style>
+
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -28,7 +34,8 @@
       <div class="productstyle">
         <a href="{% url 'category' 'SS' %}">
           <div class="productstyle text-center">
-            <img src="{% static 'app/images/product/ss1.jpg'%}" class="img-responsive center-block fit-image" alt="">
+            <img src="{% static 'app\images\product\t-shirt-ss2.jpg'%}" class="img-responsive center-block fit-image" alt="">
+            <p>Sweat Shirts</p>
           </div>
         </a>
       </div> 
@@ -37,7 +44,8 @@
         <div class="productstyle">
           <a href="{% url 'category' 'TS' %}">
             <div class="productstylet text-center">
-              <img src="{% static 'app/images/product/ts1.jpg'%}"  class="img-responsive center-block fit-image" alt="">
+              <img src="{% static 'app\images\product\t-shirt-.jpg'%}"  class="img-responsive center-block fit-image" alt="">
+              <p>T Shirts</p>
             </div>
           </a>
         </div> 
@@ -46,7 +54,8 @@
           <div class="productstyle">
             <a href="{%url 'category' 'HS' %}">
               <div classs="productstyle text-center">
-                <img src="{% static 'app/images/product/hs1.png'%}"  class="img-responsive center-block fit-image" alt="">
+                <img src="{% static 'app\images\product\t-shirt-h2.jpg'%}"  class="img-responsive center-block fit-image" alt="">
+                <p>Hoodies</p>
               </div>
             </a>
           </div> 
@@ -59,9 +68,9 @@
   <div class="row container">
     <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
       <div class="productstyle">
-        <a href="{% url 'category' 'SS' %}">
+        <a href="{% url 'category' 'TS' %}">
           <div class="productstyle text-center">
-            <img src="{% static 'app/images/product/ss1.jpg'%}" class="img-responsive center-block fit-image" alt="">
+            <img src="{% static 'app\images\product\CA.jpg'%}" class="img-responsive center-block fit-image" alt="">
           </div>
         </a>
       </div> 
@@ -70,16 +79,16 @@
         <div class="productstyle">
           <a href="{% url 'category' 'TS' %}">
             <div class="productstyle text-center">
-              <img src="{% static 'app/images/product/ts1.jpg'%}"  class="img-responsive center-block fit-image" alt="">
+              <img src="{% static 'app\images\product\flash.jpg'%}"  class="img-responsive center-block fit-image" alt="">
             </div>
           </a>
         </div> 
       </div>
       <div class="col-md-4 col-sm-4 mi-go-wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay:0.6s; animation-name:none;">
           <div class="productstyle">
-            <a href="{%url 'category' 'HS' %}">
+            <a href="{%url 'category' 'TS' %}">
               <div classs="productstyle text-center">
-                <img src="{% static 'app/images/product/hs1.png'%}"  class="img-responsive center-block fit-image" alt="">
+                <img src="{% static 'app\images\product\iron-man.jpg'%}"  class="img-responsive center-block fit-image" alt="">
               </div>
             </a>
           </div> 
@@ -117,9 +126,14 @@
       </div> 
   </div>  <br>
   <div class="container">
-    <div class="text-center">
-        <a href="{% url 'all_products' %}" class="btn btn-primary">See All</a>
-    </div>
+    {% comment %} <div class="text-center">
+        <a href="{% url 'all_products' %}" class="btn btn-primary">View All</a>
+    </div> {% endcomment %}
+ 
+  <div class="text-center">
+      <a href="{% url 'all_products' %}" class="btn btn-custom">View All</a>
+  </div>
+  
   </div>
 </div>    
 <br/><br/>

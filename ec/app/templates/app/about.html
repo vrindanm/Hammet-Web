@@ -2,6 +2,38 @@
 {% load static %}
 {% block title %}About{% endblock title %}
 {% block main-content %}
+<style>
+    body {
+        background-image: url('{% static "app\images\aboutpage.png" %}');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+   
+</style>
+<div class="container mt-3">
+    <br>
+    {% comment %} <h2 class="text-center">About</h2> {% endcomment %}
+    
+    <br><br><br>
+    <div class="row container">
+        <div class="col"><br><br><br><br>
+            <!--fs-4 text-left-->
+            <p class="text-center w-responsive mx-auto mb-5">
+                <small>Hammet Clothing specializes in designing and selling t-shirts, hoodies, and sweatshirts. It offers a wide range of designs and styles to choose from, including graphic tees, vintage tees, and custom designs.
+                Users can browse the available designs on the website and select the ones they like. It also allows users to customize their designs by selecting the size.
+                Overall, Hammet Clothing is a great web app for anyone looking for high-quality and stylish t-shirts, hoodies, and sweatshirts.</small>
+            </p>
+        </div>
+    </div>
+    <br><br>
+</div>
+
+{% endblock main-content %}
+
+{% comment %} {% extends 'app/base.html' %}
+{% load static %}
+{% block title %}About{% endblock title %}
+{% block main-content %}
 <div class="container mt-3">
     <br>
     <h2 class="text-center">About</h2>
@@ -9,8 +41,8 @@
     <br>
     <div class="row container">
         <div class="col">
-            <!--fs-4 text-left-->
-        <p class="text-center w-responsive mx-auto mb-5"><small>Hemmet Clothing is specializes in designing and selling t-shirts, hoodies, and sweatshirts. It offers a wide range of designs and styles to choose from, including graphic tees, vintage tees, and custom designs.
+         
+        <p class="text-center w-responsive mx-auto mb-5"><small>Hammet Clothing is specializes in designing and selling t-shirts, hoodies, and sweatshirts. It offers a wide range of designs and styles to choose from, including graphic tees, vintage tees, and custom designs.
 
         Users can browse the available designs on the website and select the ones they like. Also allows users to customize their designs by selecting the size.<br>
 
@@ -20,7 +52,7 @@
     <br><br>
 
 </div>
-{% endblock main-content %}
+{% endblock main-content %} {% endcomment %}
 
 
 

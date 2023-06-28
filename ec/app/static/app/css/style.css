@@ -11,13 +11,7 @@
        transform : scale(1.1);
    }
    
-   /* .owl-carousel img{
-       transition: transform .5s ease;
-     }
-    .owl-carousel img:hover{
-       
-       transform : scale(1.25);
-   } */
+ 
    
    .owl-next{
     float:right;
@@ -48,17 +42,7 @@
    .productstyle img{
        width:100%;
    }
-/*    
-   .mlkpro{
-       color:#636362;
-       font-size:22px;
-       line-height:22px;
-       margin-bottom:15px;
-       width:43%;
-       margin:0 auto;
-       text-align:center;
-       
-   } */
+
    
    .productstyle a{
        text-decoration: none;
@@ -84,7 +68,21 @@
   }
   
    
-
+  /* .nav-link {
+    position: relative;
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 4px;
+    font-size: 12px;
+  } */
+  
    
 
    

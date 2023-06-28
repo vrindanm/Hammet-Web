@@ -2,6 +2,11 @@
 {% load static %}
 {% block title %}Checkout{% endblock title %}
 {% block main-content %}
+<style>
+    .btn-custom {
+        background-color: rgb(0,128,128);
+    }
+</style>
 <div class="container">
     {% if messages %}
         {% for msg in messages%}
@@ -12,20 +17,20 @@
     {% endif %}
     <div class="row mt-5">
         <div class="col-sm-6">
-            <h4>ORDER SAMMARY</h4>
+            <h4>ORDER SUMMARY</h4>
             <br>
             {% for item in cart_items %}
-            {% comment %} <div class="card mb-2"> {% endcomment %}
+            <div class="card mb-2">
                 <div class="card-body">
                     <h5>Product: {{item.product.title}}</h5>
-                    <p>Qunatity: {{item.quantity}}</p>
+                    <p>Quantity: {{item.quantity}}</p>
                     <p class="fw-bold">Price: {{item.product.selling_price}}</p>   
-                </div><hr>
-            {% comment %} </div> {% endcomment %}
+                </div>
+            </div>
             {% endfor %}
             <p class="fw-bold">Total Cost + Rs.20 = {{totalamount}}</p>
-            <small>Terms and Condition: hvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv</small>
         </div>
+       
         <div class="col-sm-4 offset-sm-1">
             <h4>Select Shipping Address</h4>
             <br>
@@ -34,26 +39,32 @@
                 {% for ad in add %}
                 <div class="card">
                     <div class="card-body">
-                    <h5>{{ad.name}}</h5>
-                    <p>Mobile : {{ad.mobile}}</p>
-                    <p>{{ad.locality}} {{ad.city}} {{ad.state}} - {{ad.zipcode}}</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{ad.id}}" {% if forloop.counter == 1 %} checked {% endif %} {% if forloop.counter <= 0 %} disabled {% endif %}>
+                            <label class="form-check-label fw-bold" for="custadd{{forloop.counter}}">
+                                {{ad.name}} <br>
+                                Mobile: {{ad.mobile}} <br>
+                                {{ad.locality}} {{ad.city}} {{ad.state}} - {{ad.zipcode}}
+                            </label>
+                        </div>
                     </div>
                 </div>
-                    <div class="form-check mt-2 mb-5">
-                        <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{ad.id}}">
-                        <label class="form-check-label fw-bold" for="custadd{{forloop.counter}}">
-                            Address:{{forloop.counter}} </label>
-                    </div>
                 {% endfor %}
-                    <div class="form-check mb-3">
-                        <label class="totalamount" class="form-label">Total Amount</label>
-                        <input type="number" class="form-control" name="totalamount" value={{totalamount}} readonly>
-                    </div>    
-                    <div class="text-end">
-                        <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
-                    </div><br><br><br>
+                <div class="form-check mb-3">
+                    <label class="totalamount" class="form-label">Total Amount</label>
+                    <input type="number" class="form-control" name="totalamount" value="{{ totalamount }}" readonly>
+                </div>    
+                <div class="text-end">
+                    <button id="rzp-submit" type="submit" class="btn btn-custom mt-3 px-5 fw-bold">Proceed</button>
+                </div><br><br><br>
             </form>
         </div>
+        
     </div>
 </div>
 {% endblock main-content %}
+{% comment %} {% block payment-gateway %}
+<script>
+    
+</script>
+{% endblock payment-gateway%} {% endcomment %}

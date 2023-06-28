@@ -2,21 +2,28 @@
 {% load static %}
 {% block title %}Contact{% endblock title %}
 {% block main-content %}
+<style>
+    body {
+        background-image: url('{% static "app\images\contactpage.png" %}');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
 <div class="container">
 <section class="mb-4">
-    <h2 class="h1-responsive font-weight-bold text-center my-4">Contact</h2>
-    <hr>
+    {% comment %} <h2 class="h1-responsive font-weight-bold text-center my-4">Contact</h2> {% endcomment %}
+    {% comment %} <hr>  {% endcomment %}
+    <br><br>
     <form class="" method="post" action="{% url 'contact' %}" autocomplete="off">
         {% csrf_token %}
         {% for fm in form %}
             {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small><br>
         {% endfor %}
+        <br><br><br><br><br><br>
         <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly.</p>
-            {% comment %} Our team will come back to you within
-            a matter of hours to help you.</p> {% endcomment %}
         <div class="row ">
             {% comment %} <div class="col-md-9 mb-md-0 mb-5"> {% endcomment %}
-            <div class="col-sm-6 offset-sm-1">
+            {% comment %} <div class="col-sm-6 offset-sm-1">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="md-form mb-0">
@@ -40,7 +47,34 @@
                 <div class="text-center text-md-left">
                     <button type="submit" class="btn btn-primary">Send</button>
                 </div>
+            </div> {% endcomment %}
+            <div class="col-sm-6 offset-sm-1">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <input type="text" id="name" placeholder="Name" name="name" class="form-control" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <input type="text" id="email" placeholder="Email" name="email" class="form-control" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)">
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form">
+                            <textarea type="text" id="message" placeholder="Message" name="message" rows="6" class="form-control md-textarea" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="text-center text-md-left">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
             </div>
+            
             <div class="col-md-3 text-center">
                 <ul class="list-unstyled mb-0">
                     <li><i class="fas fa-map-marker-alt fa-2x"></i>
@@ -58,4 +92,15 @@
     </form>
 </section>
 </div>
+<script>
+    function clearPlaceholder(element) {
+        element.setAttribute("data-placeholder", element.placeholder);
+        element.placeholder = "";
+    }
+
+    function restorePlaceholder(element) {
+        element.placeholder = element.getAttribute("data-placeholder");
+    }
+</script>
+
 {% endblock main-content %}

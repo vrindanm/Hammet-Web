@@ -2,6 +2,15 @@
 {% load static %}
 {% block title %}Customer{% endblock title %}
 {% block main-content %} 
+<style>
+    .btn-custom {
+        background-color: rgb(128,128,128);
+    }
+    .btn1-custom{
+        background-color: rgb(192,192,192);
+
+    }
+</style>
 <div class="container my-5">
     <div class="row">
         <h3>Welcome <span class="text-capitalize">{{request.user}}</span></h3>
@@ -25,8 +34,8 @@
                             <p>City:{{ad.city}}</p>
                             <p>State:{{ad.state}}</p>
                             <p>Pincode{{ad.zipcode}}</p>
-                            <p class="text-center"><a href="{% url 'updateaddress' pk=ad.id %}" type="button" class="btn btn-warning">Update</a>
-                            <a href="{% url 'deleteaddress' pk=ad.pk %}" type="button" class="btn btn-danger">Delete</a></p>
+                            <p class="text-center"><a href="{% url 'updateaddress' pk=ad.id %}" type="button" class="btn btn1-custom">Update</a>
+                            <a href="{% url 'deleteaddress' pk=ad.pk %}" type="button" class="btn btn-custom">Delete</a></p>
                         </div>  
                     </div>
                 </div>

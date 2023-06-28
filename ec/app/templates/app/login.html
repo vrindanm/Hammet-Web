@@ -2,6 +2,15 @@
 {% load static %}
 {% block title %}Login{% endblock title %}
 {% block main-content %}
+<style>
+    .btn-custom {
+        background-color: rgb(160,160,160);
+    }
+    .text-custom {
+            color: rgb(0,128,128);
+    }   
+</style>
+
 <div class="container">
     <div class="row my-3">
         <div class="col-sm-6 offset-sm-3">
@@ -14,9 +23,9 @@
                         <br>
                 {% endfor %}
                 <small><a href="{% url 'password_reset' %}">Forgot Password?</a></small><br>
-                <input type="submit" value="Login" class="btn btn-primary">
+                <input type="submit" value="Login" class="btn btn-custom">
                 <div class="text-center text-primary fw-bold">
-                    <small>New User? <a href="{% url 'customerregistration'%}" class="text-danger">Create An Account</a></small>
+                    <small>New User? <a href="{% url 'customerregistration'%}" class="text-custom">Create An Account</a></small>
                 </div>
                 {% if form.non_field_errors %}
                         {% for error in form.non_field_errors %}

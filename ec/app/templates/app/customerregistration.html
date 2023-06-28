@@ -2,6 +2,11 @@
 {% load static %}
 {% block title %}Customer Registration{% endblock title %}
 {% block main-content %}
+<style>
+    .btn-custom {
+        background-color: rgb(160,160,160);
+    }
+</style>
     {% comment %} {{form }} {% endcomment %}
     <div class="container">
         <div class="row my-3">
@@ -14,7 +19,12 @@
                         {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
                         <br>
                     {% endfor %}
-                    <input type="submit" value="Submit" class="btn btn-primary"><br>
+                    {% comment %} <input type="submit" value="Submit" class="btn btn-custom"><br> {% endcomment %}
+                    <div class="mt-4">
+
+                        <button type="submit" class="btn btn-custom mr-2">Submit</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
+                    </div>
                     <div class="text-center text-primary fw-bold">
                         <small>Existing User? <a href="{%url 'login'%}" class="text-danger">Login Now</a></small>
                     </div>
@@ -32,9 +42,6 @@
                 {% endif %}
                 </form>
             </div>
-
         </div>
     </div>
-
-
 {% endblock main-content %}
